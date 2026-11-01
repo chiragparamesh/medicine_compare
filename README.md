@@ -14,17 +14,23 @@ MediCompare reads a handwritten prescription into an editable cart, then compare
 
 | Feature | Status |
 |---|---|
-| Project skeleton, theme, routing, CI APK build | ✅ Built |
-| Camera / gallery prescription picker | 🕓 Planned |
-| OCR service interface with placeholder implementation | 🕓 Planned |
-| Editable medicine cart | 🕓 Planned |
-| Prices from bundled mock JSON for 5 platforms | 🕓 Planned |
-| Coupon rule engine (percent, flat, max cap, min order, first order) | 🕓 Planned |
-| Results screen ranking platforms by final price | 🕓 Planned |
-| TrOCR handwriting model (fine-tuned in Colab) + fuzzy match to Indian medicine names | 🕓 Planned |
-| Cheaper generic alternative | 🕓 Planned |
-| Deep link to the cheapest platform | 🕓 Planned |
+| Camera / gallery prescription picker | ✅ Built |
+| OCR service interface with placeholder (demo) implementation | ✅ Built |
+| Fuzzy matching of OCR lines to real Indian medicine names (Levenshtein, dosage-aware) | ✅ Built |
+| Review screen: confirm or correct each detected medicine | ✅ Built |
+| Editable medicine cart (quantity, replace, add by search) | ✅ Built |
+| Prices from bundled mock JSON for 5 platforms | ✅ Built |
+| Coupon rule engine (percent, flat, max cap, min order, first order) | ✅ Built |
+| Results screen ranking platforms by final price (items + delivery − best coupon) | ✅ Built |
+| Cheaper generic alternative (same salt, strength, form) with one-tap swap | ✅ Built |
+| Deep link to the platform's search page | ✅ Built |
+| "Ordered here before" per platform (disables first-order coupons, remembered) | ✅ Built |
+| TrOCR handwriting model (fine-tuned in Colab, TFLite on device) | 🕓 Planned |
+| Larger medicine database | 🕓 Planned |
+| Live prices | 🕓 Future |
 | In-app login per platform for personal coupons | 🕓 Future |
+
+> Prices, delivery fees and coupons in `assets/data/prices_mock.json` are **illustrative demo data**, not real offers.
 
 ## Architecture
 
@@ -48,12 +54,20 @@ Full design and roadmap: [docs/architecture.md](docs/architecture.md).
 
 | Layer | Choice |
 |---|---|
-| App | Flutter (Dart), Material 3, go_router |
+| App | Flutter (Dart), Material 3, Riverpod, go_router |
 | On-device ML | TensorFlow Lite (`.tflite` exported from Colab) |
 | Training | Google Colab, Hugging Face TrOCR, PyTorch |
 | Matching | Fuzzy string matching against a medicine-name database |
 | Data (current) | Bundled mock JSON in `assets/data/` |
 | CI | GitHub Actions builds the release APK on every push |
+
+## Tests
+
+```bash
+flutter test
+```
+
+Unit tests cover the coupon engine (every rule and boundary), price ranking, generic finder, fuzzy matcher and money formatting; a widget test drives scan → cart → results.
 
 ## How to run
 
@@ -70,8 +84,8 @@ APKs are never built locally (see [CLAUDE.md](CLAUDE.md)).
 
 ## Screenshots
 
-_Coming soon._
+Web preview (Chrome), demo OCR and demo prices:
 
-| Scan | Cart | Results |
-|---|---|---|
-| _todo_ | _todo_ | _todo_ |
+| Home | Check medicines | Cart | Best prices |
+|---|---|---|---|
+| ![Home](docs/screenshots/home.png) | ![Scan](docs/screenshots/scan.png) | ![Cart](docs/screenshots/cart.png) | ![Results](docs/screenshots/results.png) |

@@ -43,7 +43,9 @@ My Windows laptop has low RAM: Android Studio and the Android emulator froze it.
 - `lib/core/theme/` — theme and colors. `lib/core/router/` — go_router routes.
 - `lib/core/services/` — platform/service interfaces. `lib/core/utils/` — constants, helpers. `lib/core/widgets/` — shared widgets.
 - `lib/features/<feature>/{data,domain,presentation}/` — one folder per feature:
-  - `lib/features/prescription_scan/` — Camera / gallery picker for the prescription photo
+  - `lib/features/home/` — Home screen (scan / gallery / add manually)
+  - `lib/features/prescription_scan/` — Camera / gallery picker + review screen (confirm detected medicines)
+  - `lib/features/catalog/` — Medicine database (`assets/data/medicines.json`) + fuzzy `MedicineMatcher`
   - `lib/features/ocr/` — OCR service interface + placeholder (TrOCR later)
   - `lib/features/cart/` — Editable medicine cart the user confirms
   - `lib/features/pricing/` — Bundled mock prices for 1mg, PharmEasy, Netmeds, Apollo 24/7, Truemeds
@@ -55,5 +57,14 @@ My Windows laptop has low RAM: Android Studio and the Android emulator froze it.
 
 ## Status
 
-Skeleton only: folders, theme, router, placeholder home screen, CI. No features built yet.
-Update the features table in README.md (Built / Planned) as features land.
+Phase 1 + 2 built (see README features table): scan/gallery → demo OCR → fuzzy match → review → editable cart →
+mock prices for 5 platforms → coupon engine → ranked results, generic swap, deep links.
+Next: medicine database growth, then the TrOCR model (docs/architecture.md roadmap).
+
+## Conventions
+
+- State: Riverpod (`flutter_riverpod`), providers live next to their feature (`*_providers.dart`, `*_controller.dart`).
+- Domain code (`domain/`) is pure Dart with unit tests in `test/unit/`; keep business rules there, not in widgets.
+- Demo data: `assets/data/medicines.json`, `assets/data/prices_mock.json` (illustrative, labelled "Demo prices" in the UI).
+- Run `flutter analyze` and `flutter test` before every push.
+- Update the features table in README.md (Built / Planned) as features land.

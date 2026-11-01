@@ -1,0 +1,277 @@
+{
+  "_note": "Demo data for MediCompare. Prices, fees and coupons are illustrative, not real offers.",
+  "platforms": [
+    {
+      "id": "tata_1mg",
+      "name": "Tata 1mg",
+      "color": "0xFFFF6F61",
+      "deliveryFee": 49,
+      "freeDeliveryAbove": 499,
+      "searchUrl": "https://www.1mg.com/search/all?name={query}",
+      "coupons": [
+        {
+          "code": "DEMO1MGNEW",
+          "description": "25% off up to ₹150 on your first order above ₹300",
+          "type": "percent",
+          "value": 25,
+          "maxCap": 150,
+          "minOrder": 300,
+          "firstOrderOnly": true
+        },
+        {
+          "code": "DEMO1MG50",
+          "description": "Flat ₹50 off on orders above ₹599",
+          "type": "flat",
+          "value": 50,
+          "minOrder": 599
+        }
+      ],
+      "prices": {
+        "dolo_650": 29.85,
+        "paracetamol_650_gen": 12.07,
+        "crocin_advance": 25.6,
+        "azithral_500": 103.89,
+        "azithromycin_500_gen": 45.64,
+        "augmentin_625": 187.22,
+        "pan_40": 134.14,
+        "pantoprazole_40_gen": 32.77,
+        "pan_d": 186.69,
+        "allegra_120": 198.62,
+        "fexofenadine_120_gen": 76.35,
+        "montair_lc": 223.5,
+        "montelukast_levo_gen": 68.91,
+        "okacet": 17.47,
+        "glycomet_500": 34.51,
+        "telma_40": 194.12,
+        "telmisartan_40_gen": 48.48,
+        "amlokind_5": 32.39,
+        "atorva_10": 115.9,
+        "atorvastatin_10_gen": 36.81,
+        "shelcal_500": 112.25,
+        "ascoril_ls": 111.61,
+        "ondem_4": 51.41,
+        "ondansetron_4_gen": 20.41,
+        "meftal_spas": 43.79,
+        "limcee": 20.7
+      }
+    },
+    {
+      "id": "pharmeasy",
+      "name": "PharmEasy",
+      "color": "0xFF10847E",
+      "deliveryFee": 59,
+      "freeDeliveryAbove": 699,
+      "searchUrl": "https://pharmeasy.in/search/all?name={query}",
+      "coupons": [
+        {
+          "code": "DEMOPEFIRST",
+          "description": "30% off up to ₹200 on your first order above ₹399",
+          "type": "percent",
+          "value": 30,
+          "maxCap": 200,
+          "minOrder": 399,
+          "firstOrderOnly": true
+        },
+        {
+          "code": "DEMOPE10",
+          "description": "10% off up to ₹100",
+          "type": "percent",
+          "value": 10,
+          "maxCap": 100
+        }
+      ],
+      "prices": {
+        "dolo_650": 28.32,
+        "paracetamol_650_gen": 11.67,
+        "crocin_advance": 23.28,
+        "azithral_500": 94.52,
+        "azithromycin_500_gen": 39.82,
+        "augmentin_625": 184.44,
+        "pan_40": 133.36,
+        "pantoprazole_40_gen": 28.72,
+        "pan_d": 187.44,
+        "pantoprazole_dom_gen": 51.87,
+        "allegra_120": 193.79,
+        "fexofenadine_120_gen": 72.63,
+        "montair_lc": 215.82,
+        "montelukast_levo_gen": 60.06,
+        "okacet": 17.39,
+        "glycomet_500": 33.56,
+        "telma_40": 204.56,
+        "telmisartan_40_gen": 45.66,
+        "amlokind_5": 31.5,
+        "atorvastatin_10_gen": 31.52,
+        "shelcal_500": 98.63,
+        "becosules": 44.14,
+        "ascoril_ls": 100.07,
+        "ondem_4": 51.05,
+        "ondansetron_4_gen": 20.13,
+        "meftal_spas": 41.04,
+        "limcee": 19.06
+      }
+    },
+    {
+      "id": "netmeds",
+      "name": "Netmeds",
+      "color": "0xFF32AEB1",
+      "deliveryFee": 39,
+      "freeDeliveryAbove": 399,
+      "searchUrl": "https://www.netmeds.com/catalogsearch/result/{query}/all",
+      "coupons": [
+        {
+          "code": "DEMONMSNEW",
+          "description": "Flat ₹100 off on your first order above ₹500",
+          "type": "flat",
+          "value": 100,
+          "minOrder": 500,
+          "firstOrderOnly": true
+        },
+        {
+          "code": "DEMONMS15",
+          "description": "15% off up to ₹75 on orders above ₹299",
+          "type": "percent",
+          "value": 15,
+          "maxCap": 75,
+          "minOrder": 299
+        }
+      ],
+      "prices": {
+        "dolo_650": 28.9,
+        "paracetamol_650_gen": 11.32,
+        "crocin_advance": 26.97,
+        "azithral_500": 99.85,
+        "azithromycin_500_gen": 42.83,
+        "augmentin_625": 183.34,
+        "amoxyclav_625_gen": 88.19,
+        "pan_40": 145.48,
+        "pantoprazole_40_gen": 30.86,
+        "pan_d": 199.06,
+        "allegra_120": 194.08,
+        "fexofenadine_120_gen": 74.92,
+        "montelukast_levo_gen": 65.05,
+        "okacet": 17.9,
+        "glycomet_500": 36.69,
+        "telma_40": 207.56,
+        "telmisartan_40_gen": 49.07,
+        "amlokind_5": 34.32,
+        "atorva_10": 111.27,
+        "atorvastatin_10_gen": 35.96,
+        "shelcal_500": 116.31,
+        "becosules": 45.04,
+        "ascoril_ls": 112.25,
+        "ondem_4": 55.36,
+        "ondansetron_4_gen": 21.05,
+        "meftal_spas": 41.52
+      }
+    },
+    {
+      "id": "apollo",
+      "name": "Apollo 24/7",
+      "color": "0xFF02475B",
+      "deliveryFee": 40,
+      "freeDeliveryAbove": 300,
+      "searchUrl": "https://www.apollopharmacy.in/search-medicines/{query}",
+      "coupons": [
+        {
+          "code": "DEMOAPOLLO20",
+          "description": "20% off up to ₹120 on your first order above ₹400",
+          "type": "percent",
+          "value": 20,
+          "maxCap": 120,
+          "minOrder": 400,
+          "firstOrderOnly": true
+        },
+        {
+          "code": "DEMOCARE50",
+          "description": "Flat ₹50 off on orders above ₹499",
+          "type": "flat",
+          "value": 50,
+          "minOrder": 499
+        }
+      ],
+      "prices": {
+        "dolo_650": 30.03,
+        "paracetamol_650_gen": 13.11,
+        "crocin_advance": 27.68,
+        "azithral_500": 103.71,
+        "azithromycin_500_gen": 48.41,
+        "augmentin_625": 202.24,
+        "amoxyclav_625_gen": 88.52,
+        "pan_40": 142.99,
+        "pantoprazole_40_gen": 35.73,
+        "pan_d": 209.78,
+        "pantoprazole_dom_gen": 59.21,
+        "allegra_120": 218.14,
+        "fexofenadine_120_gen": 81.15,
+        "montair_lc": 224.71,
+        "montelukast_levo_gen": 68.25,
+        "okacet": 19.84,
+        "glycomet_500": 36.39,
+        "telma_40": 207.48,
+        "telmisartan_40_gen": 54.14,
+        "amlokind_5": 36.22,
+        "atorva_10": 131.23,
+        "atorvastatin_10_gen": 35.76,
+        "shelcal_500": 114.18,
+        "becosules": 47.2,
+        "ascoril_ls": 108.86,
+        "ondem_4": 54.45,
+        "ondansetron_4_gen": 22.09,
+        "meftal_spas": 45.5,
+        "limcee": 21.88
+      }
+    },
+    {
+      "id": "truemeds",
+      "name": "Truemeds",
+      "color": "0xFF4F46E5",
+      "deliveryFee": 60,
+      "freeDeliveryAbove": 500,
+      "searchUrl": "https://www.truemeds.in/search/{query}",
+      "coupons": [
+        {
+          "code": "DEMOTMFLAT75",
+          "description": "Flat ₹75 off on orders above ₹350",
+          "type": "flat",
+          "value": 75,
+          "minOrder": 350
+        },
+        {
+          "code": "DEMOTM5",
+          "description": "Extra 5% off",
+          "type": "percent",
+          "value": 5
+        }
+      ],
+      "prices": {
+        "paracetamol_650_gen": 10.64,
+        "crocin_advance": 24.83,
+        "azithral_500": 96.44,
+        "azithromycin_500_gen": 38.93,
+        "augmentin_625": 176.57,
+        "amoxyclav_625_gen": 69.89,
+        "pan_40": 121.28,
+        "pantoprazole_40_gen": 29.25,
+        "pan_d": 173.41,
+        "pantoprazole_dom_gen": 50.91,
+        "allegra_120": 190.72,
+        "fexofenadine_120_gen": 65.07,
+        "montair_lc": 204.9,
+        "montelukast_levo_gen": 64.09,
+        "okacet": 14.7,
+        "glycomet_500": 34.07,
+        "telma_40": 190.74,
+        "telmisartan_40_gen": 41.43,
+        "amlokind_5": 30.25,
+        "atorva_10": 100.07,
+        "atorvastatin_10_gen": 31.36,
+        "shelcal_500": 97.14,
+        "ascoril_ls": 100.36,
+        "ondem_4": 43.85,
+        "ondansetron_4_gen": 19.35,
+        "meftal_spas": 38.43,
+        "limcee": 18.69
+      }
+    }
+  ]
+}

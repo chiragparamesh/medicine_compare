@@ -55,7 +55,9 @@ lib/
     cart/                CartItem, CartController, editable cart screen
     pricing/             PriceRepository, MockPriceRepository (assets JSON)
     coupons/             Coupon model + CouponEngine
-    results/             PlatformRanker + results screen
+    results/             QuoteCalculator (ranking), GenericFinder, results screen
+    catalog/             Medicine model, medicine database loader, MedicineMatcher (fuzzy)
+    home/                Home screen
 ```
 
 Each feature follows `data/` (sources, DTOs, repositories) → `domain/` (entities, pure logic) → `presentation/` (screens, widgets, state).
@@ -79,6 +81,14 @@ abstract class PriceRepository {
 ```
 
 - **Web preview rule:** TFLite does not run on Flutter web. `OcrService` has a placeholder implementation (returns sample lines) used on web and until the model exists; the TFLite implementation is selected only on Android.
+
+### Implementation notes (phase 1–2)
+
+- State management: Riverpod. `quotesProvider` recomputes when the cart or the "ordered before" set changes.
+- Delivery fee and coupon eligibility are both computed on the item subtotal (before the coupon).
+- Ranking: platforms that stock every item first, then lowest final total.
+- Deep link opens the platform's search page for the first cart item (no public "add to cart" links exist).
+- "First order" is per platform: a switch in each platform's breakdown, saved with shared_preferences.
 
 ## 5. Pricing and coupon engine
 
@@ -142,8 +152,8 @@ Medicines are grouped by salt composition and strength (for example, paracetamol
 | Phase | Scope |
 |---|---|
 | 0 ✅ | Skeleton, theme, router, CI APK build |
-| 1 | Image picker, placeholder OCR, editable cart |
-| 2 | Mock price JSON for 5 platforms, coupon engine + unit tests, results ranking |
+| 1 ✅ | Image picker, placeholder OCR, editable cart |
+| 2 ✅ | Mock price JSON for 5 platforms, coupon engine + unit tests, results ranking (+ generics, deep links, fuzzy matcher from phase 3 and 5) |
 | 3 | Medicine database + fuzzy matcher, generic alternatives |
 | 4 | TrOCR fine-tune in Colab, TFLite export, on-device inference |
 | 5 | Deep links to each platform's search/product page |
