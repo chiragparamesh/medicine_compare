@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/placeholder_ocr_service.dart';
+import '../data/ocr_factory.dart';
 import '../domain/ocr_service.dart';
 
-/// Swap this for the TFLite implementation once the model exists.
-final ocrServiceProvider = Provider<OcrService>((ref) => PlaceholderOcrService());
+/// Real OCR on Android (ML Kit), samples on web. Swap for TrOCR/TFLite later.
+final ocrServiceProvider = Provider<OcrService>((ref) => createDefaultOcrService());

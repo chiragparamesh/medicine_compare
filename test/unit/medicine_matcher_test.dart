@@ -34,6 +34,10 @@ void main() {
       'Tab Amlokind 5mg  1-0-0': 'amlokind_5',
       'Montair LC  1 HS x 10 days': 'montair_lc',
       'Tab Allegra 120  SOS': 'allegra_120',
+      'Tab Ecosprin 75  0-1-0 after food': 'ecosprin_75',
+      'Tab Atorva 10  HS': 'atorva_10',
+      'Tab Thyronorm 50 mcg OD': 'thyronorm_50',
+      'Tab Glycomet GP 1  1-0-1': 'glycomet_gp_1',
     };
     expected.forEach((line, id) {
       test('"$line" -> $id', () {
@@ -46,13 +50,25 @@ void main() {
       expect(matcher.match('Adv: plenty of fluids, rest').isMatched, isFalse);
     });
 
-    test('every line in the demo OCR samples is either a known medicine or advice', () {
+    test('sample prescriptions: medicine lines match, header/advice lines do not', () {
+      final notMedicine = RegExp(r'^(Dr\.|Rx|Adv|Review)');
       for (final sample in PlaceholderOcrService.samples) {
         for (final line in sample) {
-          if (line.startsWith('Adv')) continue;
-          expect(matcher.match(line).isMatched, isTrue, reason: line);
+          final m = matcher.match(line);
+          if (notMedicine.hasMatch(line)) {
+            expect(m.isMatched, isFalse, reason: line);
+          } else {
+            expect(m.isMatched, isTrue, reason: line);
+            expect(m.score, greaterThanOrEqualTo(0.75), reason: line);
+          }
         }
       }
+    });
+
+    test('Pan-D keeps its D (not read as "days")', () {
+      expect(matcher.tokens('Cap. Pan-D 1-0-0 before food'), ['pan', 'd']);
+      expect(matcher.match('Cap. Pan-D 1-0-0 before food').score, 1.0);
+      expect(matcher.tokens('Tab Azithral 500 3d'), ['azithral', '500']);
     });
   });
 

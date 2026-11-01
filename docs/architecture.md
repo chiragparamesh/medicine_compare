@@ -80,7 +80,11 @@ abstract class PriceRepository {
 }
 ```
 
-- **Web preview rule:** TFLite does not run on Flutter web. `OcrService` has a placeholder implementation (returns sample lines) used on web and until the model exists; the TFLite implementation is selected only on Android.
+- **OCR implementations (selected by `ocr_factory.dart` with a conditional import):**
+  - Android: `MlKitOcrService`, Google ML Kit on-device text recognition (Latin). Good on printed and neat handwritten text.
+  - Web / tests: `PlaceholderOcrService` with built-in sample prescriptions (ML Kit and TFLite don't run on web).
+  - Later: TrOCR fine-tuned in Colab, exported to TFLite, for messy handwriting. ML Kit stays as the fast fallback.
+- The scan screen keeps the best-scoring line per medicine and puts unmatched lines (doctor name, advice) under "Other text".
 
 ### Implementation notes (phase 1–2)
 
@@ -154,7 +158,7 @@ Medicines are grouped by salt composition and strength (for example, paracetamol
 | 0 ✅ | Skeleton, theme, router, CI APK build |
 | 1 ✅ | Image picker, placeholder OCR, editable cart |
 | 2 ✅ | Mock price JSON for 5 platforms, coupon engine + unit tests, results ranking (+ generics, deep links, fuzzy matcher from phase 3 and 5) |
-| 3 | Medicine database + fuzzy matcher, generic alternatives |
+| 3 ✅ | Medicine database (136 brands + 96 generics) + fuzzy matcher, generic alternatives, ML Kit OCR on Android |
 | 4 | TrOCR fine-tune in Colab, TFLite export, on-device inference |
 | 5 | Deep links to each platform's search/product page |
 | 6 | Live prices (where permitted) and in-app platform login for personal coupons |

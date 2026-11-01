@@ -46,7 +46,7 @@ My Windows laptop has low RAM: Android Studio and the Android emulator froze it.
   - `lib/features/home/` — Home screen (scan / gallery / add manually)
   - `lib/features/prescription_scan/` — Camera / gallery picker + review screen (confirm detected medicines)
   - `lib/features/catalog/` — Medicine database (`assets/data/medicines.json`) + fuzzy `MedicineMatcher`
-  - `lib/features/ocr/` — OCR service interface + placeholder (TrOCR later)
+  - `lib/features/ocr/` — `OcrService` interface; `MlKitOcrService` (Android, via conditional import in `ocr_factory.dart`), `PlaceholderOcrService` (samples: web, tests, "Try a sample"); TrOCR later
   - `lib/features/cart/` — Editable medicine cart the user confirms
   - `lib/features/pricing/` — Bundled mock prices for 1mg, PharmEasy, Netmeds, Apollo 24/7, Truemeds
   - `lib/features/coupons/` — Coupon rule engine: percent, flat, max cap, min order, first order
@@ -57,9 +57,11 @@ My Windows laptop has low RAM: Android Studio and the Android emulator froze it.
 
 ## Status
 
-Phase 1 + 2 built (see README features table): scan/gallery → demo OCR → fuzzy match → review → editable cart →
-mock prices for 5 platforms → coupon engine → ranked results, generic swap, deep links.
-Next: medicine database growth, then the TrOCR model (docs/architecture.md roadmap).
+Phase 1 + 2 built (see README features table): scan/gallery → ML Kit OCR (Android) / sample (web) → fuzzy match →
+review → editable cart → mock prices for 5 platforms → coupon engine → ranked results, generic swap, deep links.
+App icon + splash generated from `assets/icon/` (`dart run flutter_launcher_icons`, `dart run flutter_native_splash:create`).
+Medicine data is generated (136 brands + 96 generics); prices are illustrative.
+Next: TrOCR model in Colab (docs/architecture.md roadmap), larger medicine dataset.
 
 ## Conventions
 
@@ -67,4 +69,6 @@ Next: medicine database growth, then the TrOCR model (docs/architecture.md roadm
 - Domain code (`domain/`) is pure Dart with unit tests in `test/unit/`; keep business rules there, not in widgets.
 - Demo data: `assets/data/medicines.json`, `assets/data/prices_mock.json` (illustrative, labelled "Demo prices" in the UI).
 - Run `flutter analyze` and `flutter test` before every push.
+- Widget tests: call `rootBundle.clear()` in `setUp` (asset futures cached in one test's fake-async zone never
+  complete in the next) and use the `_settle` helper for screens that load assets.
 - Update the features table in README.md (Built / Planned) as features land.

@@ -44,7 +44,7 @@ class _MedicineSearchSheetState extends ConsumerState<_MedicineSearchSheet> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: Text(widget.title, style: Theme.of(context).textTheme.titleLarge),
             ),
             Padding(
@@ -55,7 +55,6 @@ class _MedicineSearchSheetState extends ConsumerState<_MedicineSearchSheet> {
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.search),
                   hintText: 'Medicine or salt name, e.g. Dolo or paracetamol',
-                  border: OutlineInputBorder(),
                 ),
                 onChanged: (_) => setState(() {}),
               ),

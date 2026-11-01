@@ -15,8 +15,10 @@ MediCompare reads a handwritten prescription into an editable cart, then compare
 | Feature | Status |
 |---|---|
 | Camera / gallery prescription picker | ✅ Built |
-| OCR service interface with placeholder (demo) implementation | ✅ Built |
+| On-device text recognition (Google ML Kit) on Android, behind an `OcrService` interface | ✅ Built |
+| Built-in sample prescriptions ("Try a sample"; also used by the web preview) | ✅ Built |
 | Fuzzy matching of OCR lines to real Indian medicine names (Levenshtein, dosage-aware) | ✅ Built |
+| Medicine database: 136 common Indian brands + 96 generics | ✅ Built |
 | Review screen: confirm or correct each detected medicine | ✅ Built |
 | Editable medicine cart (quantity, replace, add by search) | ✅ Built |
 | Prices from bundled mock JSON for 5 platforms | ✅ Built |
@@ -25,8 +27,8 @@ MediCompare reads a handwritten prescription into an editable cart, then compare
 | Cheaper generic alternative (same salt, strength, form) with one-tap swap | ✅ Built |
 | Deep link to the platform's search page | ✅ Built |
 | "Ordered here before" per platform (disables first-order coupons, remembered) | ✅ Built |
-| TrOCR handwriting model (fine-tuned in Colab, TFLite on device) | 🕓 Planned |
-| Larger medicine database | 🕓 Planned |
+| TrOCR handwriting model for messy doctor handwriting (fine-tuned in Colab, TFLite on device) | 🕓 Planned |
+| Medicine database from a public dataset (thousands of products) | 🕓 Planned |
 | Live prices | 🕓 Future |
 | In-app login per platform for personal coupons | 🕓 Future |
 
@@ -36,7 +38,7 @@ MediCompare reads a handwritten prescription into an editable cart, then compare
 
 ```mermaid
 flowchart LR
-    A[Camera / Gallery] --> B[OcrService<br/>placeholder → TrOCR]
+    A[Camera / Gallery] --> B[OcrService<br/>ML Kit → TrOCR]
     B --> C[Fuzzy matcher<br/>medicine database]
     C --> D[Editable cart]
     D --> E[Price provider<br/>mock JSON → live]
@@ -55,7 +57,7 @@ Full design and roadmap: [docs/architecture.md](docs/architecture.md).
 | Layer | Choice |
 |---|---|
 | App | Flutter (Dart), Material 3, Riverpod, go_router |
-| On-device ML | TensorFlow Lite (`.tflite` exported from Colab) |
+| On-device ML | Google ML Kit text recognition (now); TensorFlow Lite TrOCR from Colab (planned) |
 | Training | Google Colab, Hugging Face TrOCR, PyTorch |
 | Matching | Fuzzy string matching against a medicine-name database |
 | Data (current) | Bundled mock JSON in `assets/data/` |
@@ -84,7 +86,7 @@ APKs are never built locally (see [CLAUDE.md](CLAUDE.md)).
 
 ## Screenshots
 
-Web preview (Chrome), demo OCR and demo prices:
+Web preview (Chrome) with a sample prescription and demo prices:
 
 | Home | Check medicines | Cart | Best prices |
 |---|---|---|---|

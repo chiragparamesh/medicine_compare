@@ -3,7 +3,7 @@
     "short_name": "MediCompare",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#FFFFFF",
+    "background_color": "#00897B",
     "theme_color": "#00897B",
     "description": "Read a prescription and compare medicine prices across Indian pharmacy apps.",
     "orientation": "portrait-primary",

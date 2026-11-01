@@ -8,14 +8,19 @@ import '../../../core/widgets/cart_button.dart';
 import '../../../core/widgets/medicine_search_sheet.dart';
 import '../../cart/presentation/cart_controller.dart';
 import '../../prescription_scan/data/prescription_image_source.dart';
+import '../../prescription_scan/domain/prescription_image.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
+  static int _nextSample = 0;
+
   Future<void> _pick(BuildContext context, WidgetRef ref, PrescriptionSource source) async {
     try {
-      final bytes = await ref.read(prescriptionImageSourceProvider).pick(source);
-      if (bytes != null && context.mounted) context.push(AppRoutes.scan, extra: bytes);
+      final image = await ref.read(prescriptionImageSourceProvider).pick(source);
+      if (image != null && context.mounted) {
+        context.push(AppRoutes.scan, extra: ScanRequest.photo(image));
+      }
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context)
@@ -42,16 +47,20 @@ class HomeScreen extends ConsumerWidget {
           children: [
             Card(
               color: theme.colorScheme.primaryContainer,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.receipt_long, size: 40, color: theme.colorScheme.onPrimaryContainer),
-                    const SizedBox(height: 12),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(14),
+                      child: Image.asset('assets/icon/icon.png', width: 56, height: 56),
+                    ),
+                    const SizedBox(height: 14),
                     Text(AppConstants.tagline,
-                        style: theme.textTheme.headlineSmall
-                            ?.copyWith(color: theme.colorScheme.onPrimaryContainer)),
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                            color: theme.colorScheme.onPrimaryContainer, fontWeight: FontWeight.w700)),
                     const SizedBox(height: 8),
                     Text(
                       'Read your prescription, confirm the medicines, and see the final price '
@@ -80,6 +89,12 @@ class HomeScreen extends ConsumerWidget {
               style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(52)),
             ),
             const SizedBox(height: 4),
+            TextButton.icon(
+              key: const Key('try-sample'),
+              onPressed: () => context.push(AppRoutes.scan, extra: ScanRequest.sample(_nextSample++)),
+              icon: const Icon(Icons.auto_awesome_outlined),
+              label: const Text('Try a sample prescription'),
+            ),
             TextButton.icon(
               key: const Key('add-manually'),
               onPressed: () => _addManually(context, ref),

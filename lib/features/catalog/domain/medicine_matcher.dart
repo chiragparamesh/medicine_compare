@@ -41,13 +41,14 @@ class MedicineMatcher {
   };
   static const _stopWords = {
     'od', 'bd', 'bid', 'tds', 'tid', 'qid', 'hs', 'sos', 'stat', 'x', 'for',
-    'days', 'day', 'd', 'weeks', 'week', 'before', 'after', 'food', 'meals',
+    'days', 'day', 'weeks', 'week', 'before', 'after', 'food', 'meals',
     'morning', 'night', 'daily', 'once', 'twice', 'thrice', 'with', 'take',
   };
   static final _schedule = RegExp(r'\d+\s*-\s*\d+\s*-\s*\d+');
   static final _nonAlnum = RegExp(r'[^a-z0-9]+');
   static final _unit = RegExp(r'^(\d+(?:\.\d+)?)(mg|mcg|g|iu)$');
   static final _volume = RegExp(r'^\d+(?:\.\d+)?ml$');
+  static final _duration = RegExp(r'^\d+(d|w|wk|days?)$'); // "3d", "2w"
 
   /// Turns "Tab. Dolo 650 mg 1-0-1 x 5 days" into ["dolo", "650"].
   List<String> tokens(String line) {
@@ -57,7 +58,7 @@ class MedicineMatcher {
     for (final raw in text.split(' ')) {
       if (raw.isEmpty) continue;
       if (out.isEmpty && _prefixes.contains(raw)) continue;
-      if (_stopWords.contains(raw) || _volume.hasMatch(raw)) break;
+      if (_stopWords.contains(raw) || _volume.hasMatch(raw) || _duration.hasMatch(raw)) break;
       if (raw == 'mg' || raw == 'mcg' || raw == 'iu') continue;
       final unit = _unit.firstMatch(raw);
       out.add(unit != null ? unit.group(1)! : raw);
